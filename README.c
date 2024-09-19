@@ -37,8 +37,8 @@ Pizza cardapio[10] = {
         {6, "Quatro Queijos", "queijo parmesão, queijo mucarela, queijo gorgonzola, queijo cheddar, e oregano.", 34.00},
         {7, "Peperoni", "fatias de peperoni, queijo mussarela e oregano.", 31.50},
         {8, "Vegetariana", "legumes variados, muçarela e oregano.", 32.50},
-        {9, "Camarao", "camarão, muçarela e oregano.", 33.50},
-        {10, "Caricoa", "bacon, batata frita, muçarela e oregano.", 34.50}
+        {9, "Camarão", "camarão, muçarela e oregano.", 33.50},
+        {10, "Carioca", "bacon, batata frita, muçarela e oregano.", 34.50}
     };
 
 
