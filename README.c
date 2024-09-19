@@ -1,4 +1,3 @@
-# PIZZARIA-OS-AMOSTRADINHO
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,21 +13,16 @@ printf(" |_| |___/___/___/_/ \\_\\_|_\\___/_/ \\_\\  \\___/|___/ /_/ \\_\\_|  |_
 
 typedef struct {
 int id;
-char nome;
-char rua;
-int num_casa;
-int sabor;
-int bebida;
-char bairro;
-int borda;
-
-}Pizza;
+char *nome;
+char *descricao;
+float preco;
+}Pedido;
 
 int main()
 {
     titulo();
 
-Pizza cardapio[10] = {
+Pedido cardapio[10][1000] = {
         {1, "Mussarela", "queijo mussarela, molho de tomate e oregano.", 30.50},
         {2, "Calabresa", "calabresa, cebola, muçarela, azeitonas e oregano.", 32.00},
         {3, "Portuguesa", "presunto, muçarela, ovos, cebola, pimentão, azeitonas e oregano.", 35.00},
@@ -40,8 +34,13 @@ Pizza cardapio[10] = {
         {9, "Camarão", "camarão, muçarela e oregano.", 33.50},
         {10, "Carioca", "bacon, batata frita, muçarela e oregano.", 34.50}
     };
+    printf("\n\n");
 
-
+    for(int i = 0; i < 10; i++){
+        printf("%s\n", cardapio[i]->nome);
+        printf("%s\n", cardapio[i]->descricao);
+        printf("\n");
+    }
 
     return 0;
 }
