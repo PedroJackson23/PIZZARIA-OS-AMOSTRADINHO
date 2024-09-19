@@ -29,16 +29,16 @@ int main()
     titulo();
 
 Pizza cardapio[10] = {
-        {1, "Mussarela", "Pizza com queijo mussarela e molho de tomate.", 30.50},
-        {2, "Calabresa", "Pizza com calabresa, cebola e azeitonas.", 32.00},
-        {3, "Portuguesa", "Pizza com presunto, queijo, ovos, cebola e azeitonas.", 35.00},
-        {4, "Frango com Catupiry", "Pizza com frango desfiado e creme de catupiry.", 36.50},
-        {5, "Marguerita", "Pizza com queijo, molho de tomate e manjericão fresco.", 33.00},
-        {6, "Quatro Queijos", "Pizza com uma mistura de quatro queijos diferentes.", 34.00},
-        {7, "Peperoni", "Pizza com fatias de peperoni e queijo mussarela.", 31.50},
-        {8, "Vegetariana", "Pizza com legumes variados e queijo.", 32.50},
-        {9, "Napolitana", "Pizza com molho de tomate, queijo e anchovas.", 33.50},
-        {10, "Carbonara", "Pizza com molho branco, bacon e queijo.", 34.50}
+        {1, "Mussarela", "queijo mussarela, molho de tomate e oregano.", 30.50},
+        {2, "Calabresa", "calabresa, cebola, muçarela, azeitonas e oregano.", 32.00},
+        {3, "Portuguesa", "presunto, muçarela, ovos, cebola, pimentão, azeitonas e oregano.", 35.00},
+        {4, "Frango com Catupiry", "frango desfiado, creme de catupiry, muçarela e oregano.", 36.50},
+        {5, "Marguerita", "queijo, molho de tomate, manjericão fresco e oregano.", 33.00},
+        {6, "Quatro Queijos", "queijo parmesão, queijo mucarela, queijo gorgonzola, queijo cheddar, e oregano.", 34.00},
+        {7, "Peperoni", "fatias de peperoni, queijo mussarela e oregano.", 31.50},
+        {8, "Vegetariana", "legumes variados, muçarela e oregano.", 32.50},
+        {9, "Camarao", "camarão, muçarela e oregano.", 33.50},
+        {10, "Caricoa", "bacon, batata frita, muçarela e oregano.", 34.50}
     };
 
 
