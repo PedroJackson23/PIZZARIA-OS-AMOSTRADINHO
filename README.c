@@ -41,6 +41,10 @@ int main() {
     srand(time(NULL));
     setlocale(LC_ALL, "");
     titulo();
+    int id_cliente;
+    char nome_arquivo[50];
+
+    id_cliente = rand()%100000;
 
     Pedido pedido = {};
     Pizza cardapio[15] = {
@@ -126,7 +130,9 @@ int main() {
 
     pedido.id_do_pedido = (rand() % 9000000) + 1000000;
 
-    gravar_pedido = fopen("gravar_pedido.txt", "w");
+    sprintf(nome_arquivo, "cliente_%d.txt", id_cliente);
+
+    gravar_pedido = fopen(nome_arquivo, "w");
     if (gravar_pedido == NULL) {
         printf("Erro ao abrir o arquivo!\n");
         return 1;
