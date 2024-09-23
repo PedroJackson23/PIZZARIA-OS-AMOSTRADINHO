@@ -41,10 +41,7 @@ int main() {
     srand(time(NULL));
     setlocale(LC_ALL, "");
     titulo();
-    int id_cliente;
-    char nome_arquivo[50];
-
-    id_cliente = rand()%100000;
+    int z = 1;
 
     Pedido pedido = {};
     Pizza cardapio[15] = {
@@ -53,16 +50,16 @@ int main() {
         {3, "Portuguesa", "presunto, muçarela, ovos, cebola, pimentão, azeitonas e oregano.", 35.00},
         {4, "Frango com Catupiry", "frango desfiado, creme de catupiry, muçarela e oregano.", 36.50},
         {5, "Marguerita", "queijo, molho de tomate, manjericão fresco e oregano.", 33.00},
-        {6, "Quatro Queijos", "queijo parmesão, queijo mucarela, queijo gorgonzola, queijo cheddar, e oregano.", 34.00},
+        {6, "Quatro Queijos", "queijo parmesão, queijo muçarela, queijo gorgonzola, queijo cheddar, e oregano.", 34.00},
         {7, "Peperoni", "fatias de peperoni, queijo mussarela e oregano.", 31.50},
         {8, "Vegetariana", "legumes variados, muçarela e oregano.", 32.50},
         {9, "Camarão", "camarão, muçarela e oregano.", 33.50},
         {10, "Carioca", "bacon, batata frita, muçarela e oregano.", 34.50},
-        {11, "Beijinho", "mucarela, chocolate branco e coco ralado.", 34.50},
-        {12, "Brigadeiro", "mucarela, creme de avela e brigadeiro.", 34.50},
-        {13, "Banana", "banana, chocolate e mucarela.", 34.50},
-        {14, "Morango", "Morango, chocolate e mucarela.", 34.50},
-        {15, "M&M", "m&m, chocolate e mucarela.", 34.50}
+        {11, "Beijinho", "muçarela, chocolate branco e coco ralado.", 34.50},
+        {12, "Brigadeiro", "muçarela, creme de avelã e brigadeiro.", 34.50},
+        {13, "Banana", "banana, chocolate e muçarela.", 34.50},
+        {14, "Morango", "morango, chocolate e muçarela.", 34.50},
+        {15, "M&M", "m&m, chocolate e muçarela.", 34.50}
     };
 
     Refri menu[10] = {
@@ -78,72 +75,111 @@ int main() {
         {10, "Sem bebida", 0.00}
     };
 
-    printf("\n\n");
-    printf("=================================================================================\n");
-    printf("                                  CARDÁPIO                                       \n");
-    printf("=================================================================================\n");
-    for (int i = 0; i < 15; i++) {
-        printf("%d - %s    %.2f\n%s\n\n", i + 1, cardapio[i].nome, cardapio[i].preco, cardapio[i].descricao);
-    }
+    do {
+        printf("\n\n");
+        printf("===================================================\n");
+        printf("                       MENU                        \n");
+        printf("===================================================\n");
+        printf("1 - Registrar pedido\n2 - Consultar histórico de pedidos\n0 - Encerrar programa\n");
+        printf("===================================================\n");
+        printf("Digite a escolha desejada: ");
+        scanf("%d", &z);
 
-    printf("=================================================================================\n");
-    printf("Qual pizza você deseja escolher? Digite o id: ");
-    scanf("%d", &pedido.id_pizza);
+        switch(z) {
+            case 1:
+                printf("\n=================================================================================\n");
+                printf("                                  CARDÁPIO                                       \n");
+                printf("=================================================================================\n");
+                for (int i = 0; i < 15; i++) {
+                    printf("%d - %s    %.2f\n%s\n\n", i + 1, cardapio[i].nome, cardapio[i].preco, cardapio[i].descricao);
+                }
 
-    for (int i = 0; i < 15; i++) {
-        if (cardapio[i].id == pedido.id_pizza) {
-            strcpy(pedido.sabor, cardapio[i].nome);
-            pedido.preco = cardapio[i].preco;
+                printf("=================================================================================\n");
+                printf("Qual pizza você deseja escolher? Digite o id: ");
+                scanf("%d", &pedido.id_pizza);
+
+                for (int i = 0; i < 15; i++) {
+                    if (cardapio[i].id == pedido.id_pizza) {
+                        strcpy(pedido.sabor, cardapio[i].nome);
+                        pedido.preco = cardapio[i].preco;
+                    }
+                }
+
+                printf("\n\n");
+                printf("=================================================================================\n");
+                printf("                             CARDÁPIO DE BEBIDAS                                 \n");
+                printf("=================================================================================\n");
+                for (int j = 0; j < 10; j++) {
+                    printf("%d - %s    %.2f\n", j + 1, menu[j].nome, menu[j].preco);
+                }
+
+                printf("=================================================================================\n");
+                printf("Qual bebida você deseja escolher? Digite o id: ");
+                scanf("%d", &pedido.id_bebida);
+
+                for (int j = 0; j < 10; j++) {
+                    if (menu[j].id == pedido.id_bebida) {
+                        strcpy(pedido.bebida, menu[j].nome);
+                        pedido.preco += menu[j].preco;
+                    }
+                }
+
+                printf("Digite aqui seu Bairro: ");
+                getchar();
+                fgets(pedido.bairro, 50, stdin);
+                pedido.bairro[strcspn(pedido.bairro, "\n")] = 0;
+
+                printf("Digite aqui sua Rua: ");
+                fgets(pedido.rua, 50, stdin);
+                pedido.rua[strcspn(pedido.rua, "\n")] = 0;
+
+                printf("Digite aqui o número de sua casa: ");
+                scanf("%d", &pedido.endereco);
+
+                pedido.id_do_pedido = (rand() % 9000000) + 1000000;
+
+                gravar_pedido = fopen("gravar_pedido.txt", "a");
+                if (gravar_pedido == NULL) {
+                    printf("Erro ao abrir o arquivo!\n");
+                    return 1;
+                }
+
+                fprintf(gravar_pedido, "ID do Pedido: %ld\nID da Pizza: %d\nSabor: %s\nID da Bebida: %d\nBebida: %s\nRua: %s\nBairro: %s\nNúmero: %d\nPreço: %.2f\n\n\n",
+                        pedido.id_do_pedido, pedido.id_pizza, pedido.sabor, pedido.id_bebida, pedido.bebida, pedido.rua, pedido.bairro, pedido.endereco, pedido.preco);
+
+                fclose(gravar_pedido);
+
+                printf("Informações gravadas com sucesso!\n");
+                break;
+
+            case 2: {
+                char registro[256];
+
+                gravar_pedido = fopen("gravar_pedido.txt", "r");
+                if (gravar_pedido == NULL) {
+                    printf("Erro ao abrir o arquivo!\n");
+                    return 1;
+                }
+
+                printf("\n================== HISTÓRICO DE PEDIDOS ==================\n");
+                while (fgets(registro, sizeof(registro), gravar_pedido)) {
+                    printf("%s", registro);
+                }
+                printf("===========================================================\n");
+
+                fclose(gravar_pedido);
+                break;
+            }
+
+            case 0:
+                printf("Encerrando o programa...\n");
+                break;
+
+            default:
+                printf("Opção inválida! Tente novamente.\n");
         }
-    }
 
-    printf("\n\n");
-    printf("=================================================================================\n");
-    printf("                             CARDÁPIO DE BEBIDAS                                 \n");
-    printf("=================================================================================\n");
-    for (int j = 0; j < 10; j++) {
-        printf("%d - %s    %.2f\n", j + 1, menu[j].nome, menu[j].preco);
-    }
-
-    printf("=================================================================================\n");
-    printf("Qual bebida você deseja escolher? Digite o id: ");
-    scanf("%d", &pedido.id_bebida);
-
-    for (int j = 0; j < 10; j++) {
-        if (menu[j].id == pedido.id_bebida) {
-            strcpy(pedido.bebida, menu[j].nome);
-            pedido.preco += menu[j].preco;
-        }
-    }
-
-    printf("Digite aqui seu Bairro: ");
-    getchar();
-    fgets(pedido.bairro, 50, stdin);
-    pedido.bairro[strcspn(pedido.bairro, "\n")] = 0;
-
-    printf("Digite aqui sua Rua: ");
-    fgets(pedido.rua, 50, stdin);
-    pedido.rua[strcspn(pedido.rua, "\n")] = 0;
-
-    printf("Digite aqui o número de sua casa: ");
-    scanf("%d", &pedido.endereco);
-
-    pedido.id_do_pedido = (rand() % 9000000) + 1000000;
-
-    sprintf(nome_arquivo, "cliente_%d.txt", id_cliente);
-
-    gravar_pedido = fopen(nome_arquivo, "w");
-    if (gravar_pedido == NULL) {
-        printf("Erro ao abrir o arquivo!\n");
-        return 1;
-    }
-
-    fprintf(gravar_pedido, "ID do Pedido: %ld\nID da Pizza: %d\nSabor: %s\nID da Bebida: %d\nBebida: %s\nRua: %s\nBairro: %s\nNúmero: %d\nPreço: %.2f\n",
-            pedido.id_do_pedido, pedido.id_pizza, pedido.sabor, pedido.id_bebida, pedido.bebida, pedido.rua, pedido.bairro, pedido.endereco, pedido.preco);
-
-    fclose(gravar_pedido);
-
-    printf("Informações gravadas com sucesso!\n");
+    } while(z != 0);
 
     return 0;
 }
